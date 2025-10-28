@@ -9,7 +9,6 @@ function App() {
   ]);
 
   const handleComplete = (id) => {
-    // ✅ Correct immutable update — ensures re-render
     setTodos((prevTodos) =>
       prevTodos.map((todo) =>
         todo.id === id ? { ...todo, completed: true } : todo
@@ -18,7 +17,7 @@ function App() {
   };
 
   return (
-    <div>
+    <div data-testid="app">
       <h2>Todo App</h2>
       <TodoList todos={todos} handleComplete={handleComplete} />
     </div>
