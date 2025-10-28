@@ -1,39 +1,28 @@
-
-import React from "react";
-import './../styles/App.css';
-import { useState } from "react";
+import React, { useState } from "react";
 import TodoList from "./TodoList";
 
-const App = () => {
+function App() {
   const [todos, setTodos] = useState([
-    { id: 1, title: 'Learn React', completed: false },
-    { id: 2, title: 'Build a Todo App', completed: false },
-    { id: 3, title: 'Master JavaScript', completed: false }
+    { id: 1, title: "Learn React", completed: false },
+    { id: 2, title: "Write Code", completed: false },
+    { id: 3, title: "Pass Tests", completed: false },
   ]);
 
   const handleComplete = (id) => {
-    const updatedTodos = todos.map(todo => {
-      if (todo.id === id) {
-        return { ...todo, completed: !todo.completed };
-      }
-      return todo;
-    });
-    setTodos(updatedTodos);
+    // ✅ Correct immutable update — ensures re-render
+    setTodos((prevTodos) =>
+      prevTodos.map((todo) =>
+        todo.id === id ? { ...todo, completed: true } : todo
+      )
+    );
   };
 
   return (
     <div>
-        {/* Do not remove the main div */}
-        <h1>Parent Component</h1>
-        <TodoList todos={todos} handleComplete={handleComplete} />
+      <h2>Todo App</h2>
+      <TodoList todos={todos} handleComplete={handleComplete} />
     </div>
-  )
-};
+  );
+}
 
 export default App;
-
-
-
-
-
-
